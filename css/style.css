@@ -1,0 +1,98 @@
+/* style.css — Style général : palette naturelle, menu, accueil, listes. */
+
+:root {
+  --creme: #f6f0e2;
+  --blanc-casse: #fbf8f0;
+  --sable: #e6d9bd;
+  --pierre: #6b6a66;
+  --pierre-clair: #d9d5cb;
+  --brun: #5a4632;
+  --brun-fonce: #3b2e20;
+  --vert: #5f6f52;
+  --rayon: 10px;
+  --police-titre: Georgia, "Iowan Old Style", "Times New Roman", serif;
+  --police-texte: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--creme);
+  color: var(--brun-fonce);
+  font-family: var(--police-texte);
+  line-height: 1.6;
+}
+
+h1, h2, h3 { font-family: var(--police-titre); font-weight: normal; color: var(--brun); }
+h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 0 0 1rem; }
+h2 { font-size: 1.4rem; border-bottom: 1px solid var(--pierre-clair); padding-bottom: .3rem; }
+a { color: var(--vert); }
+:focus-visible { outline: 3px solid var(--vert); outline-offset: 3px; }
+
+.contenu { max-width: 960px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+
+/* ---------- Menu ---------- */
+.site-header { background: var(--brun-fonce); }
+.menu {
+  list-style: none; margin: 0 auto; padding: 0 .5rem; max-width: 960px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: .25rem;
+}
+.menu-lien {
+  display: flex; align-items: center; min-height: 48px; padding: 0 .9rem;
+  color: var(--sable); text-decoration: none; border-bottom: 3px solid transparent;
+}
+.menu-lien:hover { color: #fff; }
+.menu-lien.actif { color: #fff; border-bottom-color: var(--sable); font-weight: 600; }
+.menu-lien:focus-visible { outline-color: var(--sable); outline-offset: -3px; }
+.menu-icone { width: 26px; height: 26px; display: inline-block; }
+.menu-icone svg { width: 100%; height: 100%; display: block; }
+
+/* ---------- Accueil ---------- */
+.accueil { text-align: center; }
+.sous-titre { color: var(--pierre); font-style: italic; margin-bottom: 2rem; }
+.entrees-accueil {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 2rem;
+}
+.entree {
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  padding: .75rem 2rem; border-radius: var(--rayon);
+  color: var(--brun); text-decoration: none; -webkit-tap-highlight-color: transparent;
+}
+.entree-icone { display: block; width: 96px; height: 96px; transition: transform .25s ease; }
+.entree-icone svg { width: 100%; height: 100%; display: block; }
+.entree-texte { font-family: var(--police-titre); font-size: 1.4rem; letter-spacing: .08em; text-transform: uppercase; }
+
+/* Survol (souris), appui (tactile) et focus (clavier) */
+@media (hover: hover) { .entree:hover .entree-icone { transform: scale(1.12); } }
+.entree:active .entree-icone,
+.entree:focus-visible .entree-icone { transform: scale(1.12); }
+.entree:hover .entree-texte, .entree:focus-visible .entree-texte { color: var(--vert); }
+
+/* ---------- Listes de spécimens ---------- */
+.liste-specimens {
+  list-style: none; margin: 1rem 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 1rem;
+}
+.carte-specimen {
+  display: flex; flex-direction: column; height: 100%;
+  background: var(--blanc-casse); border: 1px solid var(--pierre-clair); border-radius: var(--rayon);
+  overflow: hidden; text-decoration: none; color: var(--brun-fonce);
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.carte-specimen:hover, .carte-specimen:focus-visible { box-shadow: 0 4px 12px rgba(59, 46, 32, .18); transform: translateY(-2px); }
+.vignette { aspect-ratio: 4 / 3; background: var(--sable); display: flex; align-items: center; justify-content: center; }
+.vignette img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.vignette--vide { color: var(--pierre); font-size: .85rem; font-style: italic; }
+.carte-nom { padding: .6rem .8rem 0; font-family: var(--police-titre); font-size: 1.1rem; }
+.carte-sous-titre { padding: 0 .8rem .6rem; color: var(--pierre); font-size: .9rem; font-style: italic; }
+.carte-nom:last-child { padding-bottom: .7rem; }
+
+/* ---------- Messages ---------- */
+.message { padding: .8rem 1rem; border-radius: var(--rayon); background: var(--blanc-casse); border: 1px dashed var(--pierre); }
+.message--erreur { border-style: solid; border-color: #9b3d2e; color: #7a2b1f; background: #f7e6e1; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

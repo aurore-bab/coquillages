@@ -1,0 +1,64 @@
+{
+  "_info": "Données de DÉMONSTRATION. Les valeurs « À compléter » sont à remplacer par vos propres observations.",
+  "coquillages": {
+    "buccin": {
+      "nom": "Buccin (exemple)",
+      "images": ["images/inexistante.jpg"],
+      "lieux": ["lieu-exemple"],
+      "caracteristiques": {
+        "couleur": "À compléter",
+        "fun_facts": "Donnée d'exemple : à remplacer par vos propres anecdotes.",
+        "autre": "",
+        "nom_scientifique": ""
+      },
+      "wiki": [
+        { "titre": "Coquillage — Wikipédia", "url": "https://fr.wikipedia.org/wiki/Coquillage" }
+      ]
+    }
+  },
+  "fossiles": {
+    "ammonite": {
+      "nom": "Ammonite (exemple)",
+      "images": [],
+      "lieux": ["lieu-exemple"],
+      "age": "À compléter (exemple)",
+      "caracteristiques": {
+        "couleur": "",
+        "fun_facts": "Donnée d'exemple.",
+        "autre": "",
+        "nom_scientifique": ""
+      },
+      "wiki": [
+        { "titre": "Ammonoidea — Wikipédia", "url": "https://fr.wikipedia.org/wiki/Ammonoidea" }
+      ]
+    }
+  },
+  "roches": {
+    "granite": {
+      "nom": "Granite (exemple)",
+      "images": [],
+      "lieux": ["lieu-exemple"],
+      "composition": "À compléter (exemple)",
+      "caracteristiques": {
+        "couleur": "",
+        "fun_facts": "Donnée d'exemple.",
+        "autre": "",
+        "nom_scientifique": ""
+      },
+      "wiki": [
+        { "titre": "Granite — Wikipédia", "url": "https://fr.wikipedia.org/wiki/Granite" }
+      ]
+    }
+  },
+  "lieux": {
+    "lieu-exemple": {
+      "nom": "Lieu d'exemple",
+      "coquillages": ["buccin"],
+      "fossiles": ["ammonite"],
+      "roches": ["granite"],
+      "photos": [],
+      "commentaires": "Lieu fictif pour tester le site. Remplacez-le par un vrai lieu de collecte.",
+      "coordonnees": null
+    }
+  }
+}

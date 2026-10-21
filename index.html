@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coquillages — Collection naturaliste</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+
+  <main class="contenu accueil">
+    <h1>Coquillages</h1>
+    <p class="sous-titre">Carnet de collection : roches, coquillages et fossiles</p>
+
+    <ul class="entrees-accueil">
+      <li>
+        <a class="entree" href="roches.html">
+          <span class="entree-icone" data-icone="montagne"></span>
+          <span class="entree-texte">Roches</span>
+        </a>
+      </li>
+      <li>
+        <a class="entree" href="coquillages.html">
+          <span class="entree-icone" data-icone="coquillage"></span>
+          <span class="entree-texte">Coquillages</span>
+        </a>
+      </li>
+      <li>
+        <a class="entree" href="fossiles.html">
+          <span class="entree-icone" data-icone="fossile"></span>
+          <span class="entree-texte">Fossiles</span>
+        </a>
+      </li>
+    </ul>
+  </main>
+
+  <script type="module">
+    import { initialiserNavigation } from "./js/navigation.js";
+    initialiserNavigation(); // construit le menu et remplit les icônes
+  </script>
+</body>
+</html>
