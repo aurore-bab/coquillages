@@ -4,20 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Roches — Collection</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/carte-fiches.css">
 </head>
 <body data-type="roches">
   <header class="site-header" id="site-header"></header>
 
   <main class="contenu">
     <h1>Roches</h1>
-    <!-- La carte sera ajoutée au lot 2 -->
+
+    <section aria-labelledby="titre-carte">
+      <h2 id="titre-carte">Carte des lieux</h2>
+      <div id="carte" class="carte"></div>
+      <div id="note-carte"></div>
+    </section>
+
     <section aria-labelledby="titre-liste">
       <h2 id="titre-liste">Éléments de la collection</h2>
       <div id="liste-collection" aria-live="polite"></div>
     </section>
   </main>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script type="module" src="js/collection.js"></script>
 </body>
 </html>

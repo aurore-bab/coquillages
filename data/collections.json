@@ -3,7 +3,7 @@
   "coquillages": {
     "buccin": {
       "nom": "Buccin (exemple)",
-      "images": ["images/inexistante.jpg"],
+      "images": [],
       "lieux": ["lieu-exemple"],
       "caracteristiques": {
         "couleur": "À compléter",
@@ -19,7 +19,7 @@
   "fossiles": {
     "ammonite": {
       "nom": "Ammonite (exemple)",
-      "images": [],
+      "images": ["/images/fossiles/shere_tissus.png", "/images/fossiles/triangles.png"],
       "lieux": ["lieu-exemple"],
       "age": "À compléter (exemple)",
       "caracteristiques": {
@@ -37,7 +37,7 @@
     "granite": {
       "nom": "Granite (exemple)",
       "images": [],
-      "lieux": ["lieu-exemple"],
+      "lieux": ["lieu-exemple", "lieu-inexistant"],
       "composition": "À compléter (exemple)",
       "caracteristiques": {
         "couleur": "",
@@ -58,7 +58,7 @@
       "roches": ["granite"],
       "photos": [],
       "commentaires": "Lieu fictif pour tester le site. Remplacez-le par un vrai lieu de collecte.",
-      "coordonnees": null
+      "coordonnees": { "lat":45.76, "lng":4.8 }
     }
   }
 }

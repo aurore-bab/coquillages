@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carte du monde — Coquillages</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/carte-fiches.css">
+</head>
+<body data-type="lieux">
+  <header class="site-header" id="site-header"></header>
+
+  <main class="contenu">
+    <h1>Carte du monde</h1>
+
+    <section aria-labelledby="titre-carte">
+      <h2 id="titre-carte">Tous les lieux</h2>
+      <div id="carte" class="carte"></div>
+      <div id="note-carte"></div>
+    </section>
+
+    <section aria-labelledby="titre-liste">
+      <h2 id="titre-liste">Liste des lieux</h2>
+      <div id="liste-collection" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script type="module" src="js/collection.js"></script>
+</body>
+</html>

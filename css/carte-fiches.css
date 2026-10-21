@@ -1,0 +1,53 @@
+/* carte-fiches.css — Cartes, carrousel et fiches. Utilise les variables de style.css. */
+
+/* ---------- Cartes ---------- */
+.carte {
+  height: 380px;
+  border: 1px solid var(--pierre-clair);
+  border-radius: var(--rayon);
+  background: var(--sable);
+  isolation: isolate; /* garde les calques de Leaflet sous le reste de la page */
+}
+.carte--petite { height: 260px; }
+.carte--vide { height: auto; background: none; border: 0; }
+.note { color: var(--pierre); font-size: .95rem; }
+
+/* ---------- Boutons ---------- */
+.bouton-retour, .bouton {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; padding: 0 1rem;
+  background: var(--blanc-casse); color: var(--brun);
+  border: 1px solid var(--pierre); border-radius: var(--rayon);
+  font: inherit; text-decoration: none; cursor: pointer;
+}
+.bouton { min-width: 48px; font-size: 1.3rem; }
+.bouton-retour:hover, .bouton:hover { background: var(--sable); }
+
+/* ---------- Fiches ---------- */
+.fiche-entete { margin-bottom: 1rem; }
+.fiche-entete h1 { margin-top: 1rem; }
+.fiche-sous-titre { margin: -.5rem 0 0; color: var(--pierre); font-style: italic; }
+.fiche-section { margin-top: 2rem; }
+.liste-liens { margin: .5rem 0; padding-left: 1.2rem; }
+.commentaires { white-space: pre-line; }
+
+.caracteristiques {
+  display: grid; grid-template-columns: max-content 1fr; gap: .4rem 1.2rem; margin: 0;
+}
+.caracteristiques dt { font-weight: 600; color: var(--brun); }
+.caracteristiques dd { margin: 0; }
+@media (max-width: 520px) {
+  .caracteristiques { grid-template-columns: 1fr; gap: 0; }
+  .caracteristiques dd { margin-bottom: .6rem; }
+}
+
+/* ---------- Carrousel ---------- */
+.carrousel { max-width: 640px; }
+.carrousel-cadre {
+  aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center;
+  background: var(--sable); border-radius: var(--rayon); overflow: hidden;
+}
+.carrousel-cadre img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+.carrousel-erreur { margin: 0; padding: 1rem; color: var(--pierre); font-style: italic; text-align: center; overflow-wrap: anywhere; }
+.carrousel-commandes { display: flex; align-items: center; justify-content: space-between; margin-top: .6rem; }
+.carrousel-compteur { color: var(--pierre); }
