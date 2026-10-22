@@ -4,10 +4,10 @@
 import { initialiserNavigation } from "./navigation.js";
 import { chargerBase } from "./data.js";
 import { creerListeSpecimens } from "./composants.js";
-import { afficherMessage } from "./utils.js";
+import { afficherMessage, creerElement } from "./utils.js";
 import { lieuxDeCollection } from "./relations.js";
 import { afficherCarte, creerNoteCarte } from "./carte.js";
-import { signalerProblemes } from "./verification.js";
+import { creerBarreActions, creerBoutonCreer } from "./fiche-commun.js";
 
 const MESSAGES_VIDES = {
   coquillages: "Cette collection est vide pour le moment.",
@@ -15,6 +15,13 @@ const MESSAGES_VIDES = {
   roches: "Cette collection est vide pour le moment.",
   lieux: "Aucun lieu n'est enregistré pour le moment.",
 };
+
+/** Insère le bouton « Créer une fiche » juste sous le titre de la page. */
+function ajouterBoutonCreation(type) {
+  const titre = document.querySelector("main h1");
+  if (!titre) return;
+  titre.after(creerBarreActions(creerBoutonCreer(type)));
+}
 
 /** Affiche la carte et la note sous la carte. Une panne de carte ne bloque pas la liste. */
 function afficherLaCarte(base, type) {
@@ -33,6 +40,20 @@ function afficherLaCarte(base, type) {
   }
 }
 
+/**
+ * Lance la vérification des données SANS jamais bloquer le site.
+ * Import dynamique : si verification.js est absent ou contient une erreur,
+ * on obtient seulement un avertissement dans la console.
+ */
+async function verifierSansBloquer(base) {
+  try {
+    const { signalerProblemes } = await import("./verification.js");
+    signalerProblemes(base);
+  } catch (erreur) {
+    console.warn("La vérification des données n'a pas pu être exécutée :", erreur);
+  }
+}
+
 async function demarrer() {
   initialiserNavigation();
 
@@ -45,9 +66,10 @@ async function demarrer() {
     if (!base.typeValide(type)) {
       throw new Error("Type de collection inconnu.");
     }
+    ajouterBoutonCreation(type);
     zoneListe.replaceChildren(creerListeSpecimens(base.liste(type), MESSAGES_VIDES[type]));
     afficherLaCarte(base, type);
-    signalerProblemes(base); // avertissements dans la console uniquement
+    verifierSansBloquer(base); // en tâche de fond : les erreurs vont dans la console
   } catch (erreur) {
     console.error(erreur);
     afficherMessage(zoneListe, erreur.message, "erreur");

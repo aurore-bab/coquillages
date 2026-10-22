@@ -1,4 +1,4 @@
-// fiche-commun.js — Petits blocs communs aux fiches (éléments et lieux).
+// fiche-commun.js — Petits blocs communs aux fiches (éléments et lieux) et boutons d'édition.
 
 import { creerElement } from "./utils.js";
 
@@ -25,6 +25,29 @@ export function creerBoutonRetour(urlRepli, texteRepli) {
     }
   });
   return lien;
+}
+
+/** Rangée de boutons (ex. Retour + Modifier). */
+export function creerBarreActions(...boutons) {
+  return creerElement("div", { classe: "barre-actions" }, boutons);
+}
+
+/** Bouton « Modifier » : ouvre editer.html?type=…&nom=… (adresse relative). */
+export function creerBoutonModifier(type, cle) {
+  return creerElement("a", {
+    classe: "bouton-action",
+    texte: "Modifier",
+    attrs: { href: `editer.html?type=${encodeURIComponent(type)}&nom=${encodeURIComponent(cle)}` },
+  });
+}
+
+/** Bouton « Créer une fiche » : ouvre editer.html?type=… (formulaire vide). */
+export function creerBoutonCreer(type) {
+  return creerElement("a", {
+    classe: "bouton-action",
+    texte: "Créer une fiche",
+    attrs: { href: `editer.html?type=${encodeURIComponent(type)}` },
+  });
 }
 
 /** Section de fiche : un titre h2 suivi de contenus. */

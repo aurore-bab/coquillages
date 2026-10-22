@@ -13,7 +13,7 @@
 .note { color: var(--pierre); font-size: .95rem; }
 
 /* ---------- Boutons ---------- */
-.bouton-retour, .bouton {
+.bouton-retour, .bouton, .bouton-action {
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 44px; padding: 0 1rem;
   background: var(--blanc-casse); color: var(--brun);
@@ -22,6 +22,13 @@
 }
 .bouton { min-width: 48px; font-size: 1.3rem; }
 .bouton-retour:hover, .bouton:hover { background: var(--sable); }
+
+/* Bouton d'action (Créer une fiche, Modifier) : vert, pour le distinguer de « Retour » */
+.bouton-action { color: #fff; background: var(--vert); border-color: var(--vert); }
+.bouton-action:hover { background: #4d5b42; }
+
+/* Rangée de boutons sous le titre ou en tête de fiche */
+.barre-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin: .5rem 0 1rem; }
 
 /* ---------- Fiches ---------- */
 .fiche-entete { margin-bottom: 1rem; }

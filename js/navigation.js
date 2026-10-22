@@ -14,6 +14,9 @@ const LIENS = [
 // Page sans lien propre dans le menu → lien à mettre en valeur à la place.
 const PAGES_LIEES = { "lieu.html": "carte-monde.html" };
 
+// Pages dont la rubrique dépend du paramètre ?type= de l'adresse.
+const PAGES_AVEC_TYPE = ["element.html", "editer.html"];
+
 /** Nom du fichier de la page courante ("/depot/" ou "/depot/roches" sont gérés). */
 function fichierCourant() {
   let nom = window.location.pathname.split("/").pop();
@@ -27,13 +30,14 @@ export function initialiserNavigation() {
   if (!entete) return;
 
   const courant = fichierCourant();
-  // Sur une fiche d'élément, on met en valeur la collection correspondante.
-  const typeActif = courant === "element.html" ? obtenirParametre("type") : null;
+  const typeActif = PAGES_AVEC_TYPE.includes(courant) ? obtenirParametre("type") : null;
+  // Les lieux n'ont pas de lien propre : ils dépendent de « Carte du monde ».
+  const pageLiee = typeActif === "lieux" ? "carte-monde.html" : PAGES_LIEES[courant];
 
   const liste = creerElement("ul", { classe: "menu" });
   for (const lien of LIENS) {
     const pageActive = lien.href === courant;
-    const sectionActive = lien.href === PAGES_LIEES[courant];
+    const sectionActive = lien.href === pageLiee;
     const actif = pageActive || sectionActive || (lien.type !== null && lien.type === typeActif);
 
     const a = creerElement("a", {

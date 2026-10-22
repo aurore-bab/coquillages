@@ -4,7 +4,10 @@ import { initialiserNavigation } from "./navigation.js";
 import { chargerBase, TYPES } from "./data.js";
 import { obtenirParametre, creerElement, urlFiche } from "./utils.js";
 import { creerCarrousel } from "./carrousel.js";
-import { creerBoutonRetour, creerSection, creerListeLiens, messageVide } from "./fiche-commun.js";
+import {
+  creerBoutonRetour, creerBoutonModifier, creerBarreActions,
+  creerSection, creerListeLiens, messageVide,
+} from "./fiche-commun.js";
 import { lieuxDuSpecimen, TYPES_SPECIMENS } from "./relations.js";
 
 const racine = document.getElementById("fiche");
@@ -55,7 +58,10 @@ function sectionLiens(specimen) {
 function afficherFiche(base, specimen) {
   document.title = `${specimen.nom} — Coquillages`;
   const entete = creerElement("header", { classe: "fiche-entete" }, [
-    creerBoutonRetour(`${specimen.type}.html`, `Retour à la collection ${TYPES[specimen.type].label}`),
+    creerBarreActions(
+      creerBoutonRetour(`${specimen.type}.html`, `Retour à la collection ${TYPES[specimen.type].label}`),
+      creerBoutonModifier(specimen.type, specimen.cle)
+    ),
     creerElement("h1", { texte: specimen.nom }),
   ]);
   if (specimen.sousTitre()) {

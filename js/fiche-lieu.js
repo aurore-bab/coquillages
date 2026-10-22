@@ -6,7 +6,10 @@ import { obtenirParametre, creerElement } from "./utils.js";
 import { creerCarrousel } from "./carrousel.js";
 import { creerListeSpecimens } from "./composants.js";
 import { afficherCarte } from "./carte.js";
-import { creerBoutonRetour, creerSection, messageVide } from "./fiche-commun.js";
+import {
+  creerBoutonRetour, creerBoutonModifier, creerBarreActions,
+  creerSection, messageVide,
+} from "./fiche-commun.js";
 import { specimensDuLieu, TYPES_SPECIMENS } from "./relations.js";
 
 const racine = document.getElementById("fiche");
@@ -59,7 +62,7 @@ function afficherFiche(base, lieu) {
     ];
   } else {
     contenuLocalisation = [messageVide(
-      "Coordonnées non renseignées. Pour les ajouter : champ « coordonnees » de ce lieu dans data/collections.json."
+      "Coordonnées non renseignées. Utilisez le bouton « Modifier » pour les ajouter."
     )];
   }
 
@@ -69,7 +72,10 @@ function afficherFiche(base, lieu) {
 
   racine.replaceChildren(
     creerElement("header", { classe: "fiche-entete" }, [
-      creerBoutonRetour("carte-monde.html", "Retour à la carte du monde"),
+      creerBarreActions(
+        creerBoutonRetour("carte-monde.html", "Retour à la carte du monde"),
+        creerBoutonModifier("lieux", lieu.cle)
+      ),
       creerElement("h1", { texte: lieu.nom }),
     ]),
     creerSection("Photographies", creerCarrousel(lieu.photos, lieu.nom)),
