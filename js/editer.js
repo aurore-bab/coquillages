@@ -4,11 +4,14 @@
 
 import { initialiserNavigation } from "./navigation.js";
 import { chargerBase } from "./data.js";
-import { obtenirParametre, creerElement, urlFiche } from "./utils.js";
+import { obtenirParametre, creerElement, urlFiche, creerCle } from "./utils.js";
 import { SCHEMAS } from "./schemas-formulaire.js";
 import { creerFormulaire } from "./formulaire.js";
 import { validerFormulaire } from "./validation.js";
 import { lireValeursInitiales, aDesChangements, preparerModification } from "./modifications.js";
+import { creerGestionPhotos } from "./gestion-photos.js";
+import { preparerPhotos, fusionnerPhotos } from "./modifications-photos.js";
+import { ErreurImage } from "./images.js";
 import { sauvegarder, sauvegardeConfiguree } from "./sauvegarde.js";
 
 const racine = document.getElementById("editeur");
@@ -27,12 +30,17 @@ function afficherErreurPage(texte, type) {
   );
 }
 
+/** Les images (Blob) ne s'affichent pas en JSON : on les décrit par leur type et leur taille. */
+function remplacerBlob(cle, valeur) {
+  return valeur instanceof Blob ? `[fichier ${valeur.type}, ${valeur.size} octets]` : valeur;
+}
+
 /** Détail des changements préparés, pour vérification (textContent : aucun risque d'injection). */
 function creerApercu(modification) {
   return creerElement("details", { classe: "apercu" }, [
     creerElement("summary", { texte: "Voir ce qui serait enregistré" }),
     creerElement("ul", {}, modification.resume.map((t) => creerElement("li", { texte: t }))),
-    creerElement("pre", { classe: "apercu-json", texte: JSON.stringify(modification, null, 2) }),
+    creerElement("pre", { classe: "apercu-json", texte: JSON.stringify(modification, remplacerBlob, 2) }),
   ]);
 }
 
@@ -46,12 +54,17 @@ function construirePage(base, type, objet) {
   const formulaire = creerFormulaire(base, schema, initial);
   const form = formulaire.element;
 
+  // ----- Section photos, insérée sous le champ Nom -----
+  const photos = creerGestionPhotos({ type, objet });
+  const champNom = form.querySelector("#champ-nom")?.closest(".champ");
+  if (champNom) champNom.after(photos.element);
+  else form.prepend(photos.element);
+
   // ----- Boutons et zone de statut -----
   const boutonSauver = creerElement("button", { classe: "bouton bouton-principal", texte: "Sauvegarder", attrs: { type: "submit" } });
   const boutonAnnuler = creerElement("button", { classe: "bouton", texte: "Annuler", attrs: { type: "button" } });
   const zoneStatut = creerElement("div", { classe: "zone-statut", attrs: { "aria-live": "polite" } });
   form.append(
-    creerElement("p", { classe: "note", texte: "Photographies : la gestion des photos sera ajoutée au prochain lot. Les photos déjà enregistrées ne sont pas modifiées." }),
     creerElement("div", { classe: "formulaire-actions" }, [boutonSauver, boutonAnnuler]),
     zoneStatut
   );
@@ -68,9 +81,11 @@ function construirePage(base, type, objet) {
   }
   racine.replaceChildren(...enveloppe, form);
 
-  // ----- État : modifications non sauvegardées -----
+  // ----- État : modifications non sauvegardées (champs ET photos) -----
   const etat = { modifie: false, quitter: false, enCours: false, termine: false };
-  const majEtat = () => { etat.modifie = aDesChangements(schema, initial, formulaire.lireValeurs()); };
+  const majEtat = () => {
+    etat.modifie = aDesChangements(schema, initial, formulaire.lireValeurs()) || photos.aDesChangements();
+  };
   form.addEventListener("input", majEtat);
   form.addEventListener("change", majEtat);
 
@@ -87,6 +102,7 @@ function construirePage(base, type, objet) {
   boutonAnnuler.addEventListener("click", () => {
     if (etat.modifie && !window.confirm("Abandonner les modifications non sauvegardées ?")) return;
     etat.quitter = true;
+    photos.abandonner(); // les photos temporaires sont abandonnées, les fichiers existants restent inchangés
     window.location.href = creation ? schema.pageCollection : urlFiche(type, objet.cle);
   });
 
@@ -121,17 +137,28 @@ function construirePage(base, type, objet) {
       afficherStatut("Le formulaire contient des erreurs : corrigez les champs signalés.", "erreur");
       return;
     }
-    if (!aDesChangements(schema, initial, valeurs)) {
+    const photosModifiees = photos.aDesChangements();
+    if (!aDesChangements(schema, initial, valeurs) && !photosModifiees) {
       afficherStatut("Aucune modification à enregistrer.", "info");
       return;
     }
 
-    const modification = preparerModification({ base, schema, type, objet, valeurs, initial });
-    console.info("Modification préparée (PAS encore enregistrée) :", modification);
-
     etat.enCours = true;
     basculerChargement(true);
+    let modification = null;
     try {
+      modification = preparerModification({ base, schema, type, objet, valeurs, initial });
+      if (photosModifiees) {
+        // La clé d'une fiche existante ne change jamais : ses fichiers et ses liens restent valides.
+        const cle = objet ? objet.cle : creerCle(valeurs.nom);
+        const prep = await preparerPhotos({
+          base, type, cle, entrees: photos.lireEtat(), initiales: photos.initiales,
+          fichiersConnus: [], // lot C : liste réelle des fichiers du dépôt, fournie par le backend
+        });
+        fusionnerPhotos(modification, { type, cle, prep });
+      }
+      console.info("Modification préparée (PAS encore enregistrée) :", modification);
+
       await sauvegarder(modification);
       // On n'arrive ici que si le backend a CONFIRMÉ l'enregistrement (branché au lot C ;
       // cette partie sera revue et testée à ce moment-là).
@@ -141,8 +168,9 @@ function construirePage(base, type, objet) {
       afficherStatut("Enregistré dans GitHub. Le site sera à jour après le déploiement (1 à 2 minutes).", "succes", retour);
     } catch (erreur) {
       console.error(erreur);
-      // Les modifications restent dans le formulaire.
-      afficherStatut(erreur.message || "La sauvegarde a échoué.", "erreur", creerApercu(modification));
+      // Les modifications (champs et photos) restent dans le formulaire.
+      const apercu = modification && !(erreur instanceof ErreurImage) ? creerApercu(modification) : null;
+      afficherStatut(erreur.message || "La sauvegarde a échoué.", "erreur", apercu);
     } finally {
       etat.enCours = false;
       basculerChargement(false);
