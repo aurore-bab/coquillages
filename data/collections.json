@@ -14,7 +14,21 @@
       "wiki": [
         { "titre": "Coquillage — Wikipédia", "url": "https://fr.wikipedia.org/wiki/Coquillage" }
       ]
-    }
+    },
+  "coquille-saint-jacques": {
+    "nom": "Coquille Saint-Jacques",
+    "images": ["images/coquillages/saint-jacques-1.jpg", "images/coquillages/saint-jacques-2.jpg"],
+    "lieux": ["plage-exemple"],
+    "caracteristiques": {
+      "couleur": "Beige et brun",
+      "fun_facts": "Trouvée un jour de tempête.",
+      "autre": "",
+      "nom_scientifique": ""
+    },
+    "wiki": [
+      { "titre": "Pecten maximus — Wikipédia", "url": "https://fr.wikipedia.org/wiki/Pecten_maximus" }
+    ]
+  }
   },
   "fossiles": {
     "ammonite": {
@@ -59,6 +73,15 @@
       "photos": [],
       "commentaires": "Lieu fictif pour tester le site. Remplacez-le par un vrai lieu de collecte.",
       "coordonnees": { "lat":45.76, "lng":4.8 }
+    },
+    "lieu-exemple1": {
+      "nom": "Lieu d'exemple",
+      "coquillages": ["buccin"],
+      "fossiles": ["ammonite"],
+      "roches": ["granite"],
+      "photos": [],
+      "commentaires": "Lieu fictif pour tester le site. Remplacez-le par un vrai lieu de collecte.",
+      "coordonnees": { "lat":4.76, "lng":47.8 }
     }
   }
 }

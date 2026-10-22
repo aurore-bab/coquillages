@@ -7,6 +7,7 @@ import { creerListeSpecimens } from "./composants.js";
 import { afficherMessage } from "./utils.js";
 import { lieuxDeCollection } from "./relations.js";
 import { afficherCarte, creerNoteCarte } from "./carte.js";
+import { signalerProblemes } from "./verification.js";
 
 const MESSAGES_VIDES = {
   coquillages: "Cette collection est vide pour le moment.",
@@ -46,6 +47,7 @@ async function demarrer() {
     }
     zoneListe.replaceChildren(creerListeSpecimens(base.liste(type), MESSAGES_VIDES[type]));
     afficherLaCarte(base, type);
+    signalerProblemes(base); // avertissements dans la console uniquement
   } catch (erreur) {
     console.error(erreur);
     afficherMessage(zoneListe, erreur.message, "erreur");

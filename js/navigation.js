@@ -11,6 +11,9 @@ const LIENS = [
   { href: "carte-monde.html", texte: "Carte du monde", type: null },
 ];
 
+// Page sans lien propre dans le menu → lien à mettre en valeur à la place.
+const PAGES_LIEES = { "lieu.html": "carte-monde.html" };
+
 /** Nom du fichier de la page courante ("/depot/" ou "/depot/roches" sont gérés). */
 function fichierCourant() {
   let nom = window.location.pathname.split("/").pop();
@@ -30,12 +33,14 @@ export function initialiserNavigation() {
   const liste = creerElement("ul", { classe: "menu" });
   for (const lien of LIENS) {
     const pageActive = lien.href === courant;
-    const actif = pageActive || (lien.type !== null && lien.type === typeActif);
+    const sectionActive = lien.href === PAGES_LIEES[courant];
+    const actif = pageActive || sectionActive || (lien.type !== null && lien.type === typeActif);
 
     const a = creerElement("a", {
       classe: actif ? "menu-lien actif" : "menu-lien",
       attrs: { href: lien.href },
     });
+    // aria-current="page" seulement si c'est vraiment la page affichée.
     if (pageActive) a.setAttribute("aria-current", "page");
 
     if (lien.icone) {
