@@ -19,3 +19,5 @@
 | `js/fiche-element.js`, `js/fiche-lieu.js` | Fiches. |
 | `js/verification.js` | Contrôle de cohérence du JSON (console). |
 | `images/…` | les photos, un sous-dossier par catégorie. |
+
+

@@ -1,0 +1,63 @@
+/* formulaire.css — Formulaire d'édition. Utilise les variables de style.css. */
+
+.formulaire { max-width: 720px; }
+.champ, .champ-groupe { margin: 0 0 1.5rem; }
+.champ label, .champ-simple label { display: block; margin-bottom: .25rem; font-weight: 600; color: var(--brun); }
+.obligatoire { font-weight: normal; font-size: .9rem; color: var(--pierre); }
+.champ-aide { margin: 0 0 .4rem; font-size: .9rem; color: var(--pierre); }
+.champ-erreur { margin: .4rem 0 0; font-weight: 600; color: #7a2b1f; }
+
+/* 16 px minimum : évite le zoom automatique sur iPhone */
+.formulaire input[type="text"],
+.formulaire input[type="url"],
+.formulaire textarea {
+  display: block; width: 100%; max-width: 100%; min-height: 44px; padding: .55rem .7rem;
+  font: inherit; color: var(--brun-fonce); background: var(--blanc-casse);
+  border: 1px solid var(--pierre); border-radius: var(--rayon);
+}
+.formulaire textarea { resize: vertical; }
+.formulaire [aria-invalid="true"] { border: 2px solid #9b3d2e; }
+
+/* Groupes (relations, liens, coordonnées) */
+.champ-groupe { min-width: 0; padding: .8rem 1rem 1rem; border: 1px solid var(--pierre-clair); border-radius: var(--rayon); }
+.champ-groupe legend { padding: 0 .4rem; font-weight: 600; color: var(--brun); }
+.liste-cases, .liste-lignes { list-style: none; margin: 0; padding: 0; }
+.case { display: flex; align-items: center; gap: .6rem; min-height: 44px; cursor: pointer; }
+.case input { flex: none; width: 22px; height: 22px; accent-color: var(--vert); }
+
+.ligne-lien { display: grid; grid-template-columns: 1fr 1.4fr auto; gap: .5rem; margin-bottom: .6rem; }
+.ligne-lien > * { min-width: 0; }
+.champ-coordonnees { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.champ-coordonnees > * { min-width: 0; }
+@media (max-width: 600px) {
+  .ligne-lien, .champ-coordonnees { grid-template-columns: 1fr; }
+}
+
+/* Boutons */
+.formulaire .bouton { font-size: 1rem; padding: 0 1.2rem; }
+.bouton-principal { color: #fff; background: var(--vert); border-color: var(--vert); }
+.bouton-principal:hover { background: #4d5b42; }
+.bouton-danger { color: #7a2b1f; }
+.bouton[disabled] { opacity: .6; cursor: not-allowed; }
+.formulaire-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.5rem 0 1rem; }
+@media (max-width: 520px) {
+  .formulaire-actions .bouton { flex: 1 1 100%; }
+}
+
+/* Indicateur de chargement */
+.spinner {
+  display: inline-block; width: 1em; height: 1em; margin-right: .4rem;
+  border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%;
+  animation: tourner .8s linear infinite;
+}
+@keyframes tourner { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 3s; } }
+
+/* Messages et aperçu */
+.message--info { border-style: solid; }
+.message--succes { border-style: solid; border-color: var(--vert); color: #33402b; background: #e9efe2; }
+.apercu { margin-top: .8rem; }
+.apercu-json {
+  max-width: 100%; overflow-x: auto; padding: .8rem; font-size: .85rem;
+  background: var(--blanc-casse); border: 1px solid var(--pierre-clair); border-radius: var(--rayon);
+}
