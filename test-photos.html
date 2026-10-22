@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test des photos — Coquillages</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/carte-fiches.css">
+  <link rel="stylesheet" href="css/formulaire.css">
+  <link rel="stylesheet" href="css/recadrage.css">
+</head>
+<body>
+  <header class="site-header" id="site-header"></header>
+
+  <main class="contenu">
+    <h1>Test des photos</h1>
+    <p class="message message--info">
+      Page de test temporaire. Les photos sont traitées dans votre navigateur, rien n'est envoyé
+      ni enregistré, et tout disparaît au rechargement.
+    </p>
+
+    <div id="selection"></div>
+
+    <section aria-labelledby="titre-resultats">
+      <h2 id="titre-resultats">Photos prêtes</h2>
+      <p class="note" id="vide">Aucune photo pour le moment.</p>
+      <ul class="liste-resultats" id="resultats"></ul>
+    </section>
+  </main>
+
+  <script type="module" src="js/test-photos.js"></script>
+  <style>
+    .liste-resultats { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+    .resultat { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; padding: .75rem;
+                background: var(--blanc-casse); border: 1px solid var(--pierre-clair); border-radius: var(--rayon); }
+    .resultat img { width: 120px; height: 120px; object-fit: cover; border-radius: 6px; }
+    .resultat p { margin: 0; }
+  </style>
+</body>
+</html>

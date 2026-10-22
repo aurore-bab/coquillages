@@ -1,0 +1,59 @@
+/* recadrage.css — Fenêtre de recadrage et boutons d'ajout de photo. */
+
+.recadrage-dialogue {
+  width: min(94vw, 640px);
+  max-height: 94vh;
+  max-height: 94dvh;
+  padding: 1rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  color: var(--brun-fonce);
+  background: var(--creme);
+  border: 1px solid var(--pierre);
+  border-radius: var(--rayon);
+}
+.recadrage-dialogue::backdrop { background: rgba(59, 46, 32, .65); }
+.recadrage-dialogue h2 { margin-top: 0; }
+
+/* Le carré garde ses proportions à toutes les tailles d'écran */
+.recadrage-zone {
+  width: min(100%, 520px, 60vh);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 1rem;
+  overflow: hidden;
+  background: var(--sable);
+  border-radius: var(--rayon);
+}
+.recadrage-canvas {
+  display: block; width: 100%; height: 100%;
+  touch-action: none;           /* uniquement ici : le reste de la page défile normalement */
+  cursor: grab; user-select: none; -webkit-user-select: none;
+}
+.recadrage-canvas:active { cursor: grabbing; }
+.recadrage-canvas:focus-visible { outline: 3px solid var(--vert); outline-offset: -3px; }
+
+.recadrage-zoom { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+.recadrage-zoom input[type="range"] { flex: 1; min-width: 0; min-height: 44px; accent-color: var(--vert); }
+.recadrage-valeur { min-width: 3.5em; color: var(--pierre); text-align: right; }
+
+.recadrage-resultat img {
+  display: block;
+  width: min(100%, 520px, 60vh);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 1rem;
+  object-fit: cover;
+  border-radius: var(--rayon);
+}
+.recadrage-resultat .note { text-align: center; }
+
+.recadrage-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .75rem; margin-top: 1rem; }
+@media (max-width: 520px) {
+  .recadrage-actions .bouton { flex: 1 1 100%; }
+}
+
+/* Boutons d'ajout de photo (hors formulaire : on remet une taille de texte normale) */
+.recadrage-dialogue .bouton, .photos-ajout .bouton { font-size: 1rem; padding: 0 1.2rem; }
+.photos-ajout-boutons { display: flex; flex-wrap: wrap; gap: .75rem; }
+@media (max-width: 520px) {
+  .photos-ajout-boutons .bouton { flex: 1 1 100%; }
+}
