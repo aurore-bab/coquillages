@@ -93,14 +93,15 @@
     "pierre-feuille-ciseaux": {
       "nom": "pierre feuille ciseaux",
       "images": [
-        "images/roches/pierre-feuille-ciseaux_2.jpg"
+        "images/roches/pierre-feuille-ciseaux_2.jpg",
+        "images/roches/pierre-feuille-ciseaux_3.jpg"
       ],
       "lieux": [
         "lieu-exemple1"
       ],
       "caracteristiques": {
         "couleur": "blanc",
-        "fun_facts": "aucun",
+        "fun_facts": "aucunfichkclhckhxigxgixutdutx",
         "autre": "",
         "nom_scientifique": "pierrus feuillus cisux"
       },
