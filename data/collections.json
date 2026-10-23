@@ -4,7 +4,9 @@
     "buccin": {
       "nom": "Buccin (exemple)",
       "images": [],
-      "lieux": ["lieu-exemple"],
+      "lieux": [
+        "lieu-exemple"
+      ],
       "caracteristiques": {
         "couleur": "À compléter",
         "fun_facts": "Donnée d'exemple : à remplacer par vos propres anecdotes.",
@@ -12,29 +14,45 @@
         "nom_scientifique": ""
       },
       "wiki": [
-        { "titre": "Coquillage — Wikipédia", "url": "https://fr.wikipedia.org/wiki/Coquillage" }
+        {
+          "titre": "Coquillage — Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Coquillage"
+        }
       ]
     },
-  "coquille-saint-jacques": {
-    "nom": "Coquille Saint-Jacques",
-    "images": ["images/coquillages/saint-jacques-1.jpg", "images/coquillages/saint-jacques-2.jpg"],
-    "lieux": ["plage-exemple"],
-    "caracteristiques": {
-      "couleur": "Beige et brun",
-      "fun_facts": "Trouvée un jour de tempête.",
-      "autre": "",
-      "nom_scientifique": ""
-    },
-    "wiki": [
-      { "titre": "Pecten maximus — Wikipédia", "url": "https://fr.wikipedia.org/wiki/Pecten_maximus" }
-    ]
-  }
+    "coquille-saint-jacques": {
+      "nom": "Coquille Saint-Jacques",
+      "images": [
+        "images/coquillages/saint-jacques-1.jpg",
+        "images/coquillages/saint-jacques-2.jpg"
+      ],
+      "lieux": [
+        "plage-exemple"
+      ],
+      "caracteristiques": {
+        "couleur": "Beige et brun",
+        "fun_facts": "Trouvée un jour de tempête.",
+        "autre": "",
+        "nom_scientifique": ""
+      },
+      "wiki": [
+        {
+          "titre": "Pecten maximus — Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Pecten_maximus"
+        }
+      ]
+    }
   },
   "fossiles": {
     "ammonite": {
       "nom": "Ammonite (exemple)",
-      "images": ["/images/fossiles/shere_tissus.png", "/images/fossiles/triangles.png"],
-      "lieux": ["lieu-exemple"],
+      "images": [
+        "/images/fossiles/shere_tissus.png",
+        "/images/fossiles/triangles.png"
+      ],
+      "lieux": [
+        "lieu-exemple"
+      ],
       "age": "À compléter (exemple)",
       "caracteristiques": {
         "couleur": "",
@@ -43,7 +61,10 @@
         "nom_scientifique": ""
       },
       "wiki": [
-        { "titre": "Ammonoidea — Wikipédia", "url": "https://fr.wikipedia.org/wiki/Ammonoidea" }
+        {
+          "titre": "Ammonoidea — Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Ammonoidea"
+        }
       ]
     }
   },
@@ -51,7 +72,10 @@
     "granite": {
       "nom": "Granite (exemple)",
       "images": [],
-      "lieux": ["lieu-exemple", "lieu-inexistant"],
+      "lieux": [
+        "lieu-exemple",
+        "lieu-inexistant"
+      ],
       "composition": "À compléter (exemple)",
       "caracteristiques": {
         "couleur": "",
@@ -60,28 +84,66 @@
         "nom_scientifique": ""
       },
       "wiki": [
-        { "titre": "Granite — Wikipédia", "url": "https://fr.wikipedia.org/wiki/Granite" }
+        {
+          "titre": "Granite — Wikipédia",
+          "url": "https://fr.wikipedia.org/wiki/Granite"
+        }
       ]
+    },
+    "pierre-feuille-ciseaux": {
+      "nom": "pierre feuille ciseaux",
+      "images": [
+        "images/roches/pierre-feuille-ciseaux_1.jpg"
+      ],
+      "lieux": [
+        "lieu-exemple1"
+      ],
+      "caracteristiques": {
+        "couleur": "blanc",
+        "fun_facts": "aucun",
+        "autre": "",
+        "nom_scientifique": "pierrus feuillus cisux"
+      },
+      "wiki": [],
+      "composition": "carbone"
     }
   },
   "lieux": {
     "lieu-exemple": {
       "nom": "Lieu d'exemple",
-      "coquillages": ["buccin"],
-      "fossiles": ["ammonite"],
-      "roches": ["granite"],
+      "coquillages": [
+        "buccin"
+      ],
+      "fossiles": [
+        "ammonite"
+      ],
+      "roches": [
+        "granite"
+      ],
       "photos": [],
       "commentaires": "Lieu fictif pour tester le site. Remplacez-le par un vrai lieu de collecte.",
-      "coordonnees": { "lat":45.76, "lng":4.8 }
+      "coordonnees": {
+        "lat": 45.76,
+        "lng": 4.8
+      }
     },
     "lieu-exemple1": {
       "nom": "Lieu d'exemple",
-      "coquillages": ["buccin"],
-      "fossiles": ["ammonite"],
-      "roches": ["granite"],
+      "coquillages": [
+        "buccin"
+      ],
+      "fossiles": [
+        "ammonite"
+      ],
+      "roches": [
+        "granite"
+      ],
       "photos": [],
       "commentaires": "Lieu fictif pour tester le site. Remplacez-le par un vrai lieu de collecte.",
-      "coordonnees": { "lat":4.76, "lng":47.8 }
+      "coordonnees": {
+        "lat": 4.76,
+        "lng": 47.8
+      }
     }
   }
 }
