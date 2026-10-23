@@ -1,0 +1,16 @@
+/* edition.css — Écran de mot de passe et bandeau « connecté ». */
+
+/* Champ mot de passe : même aspect que les autres champs du formulaire */
+.formulaire input[type="password"] {
+  display: block; width: 100%; max-width: 100%; min-height: 44px; padding: .55rem .7rem;
+  font: inherit; color: var(--brun-fonce); background: var(--blanc-casse);
+  border: 1px solid var(--pierre); border-radius: var(--rayon);
+}
+
+.bandeau-edition {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: .5rem 1rem; margin: 0 0 1.2rem; padding: .5rem .9rem;
+  font-size: .9rem; color: #33402b; background: #e9efe2;
+  border: 1px solid var(--vert); border-radius: var(--rayon);
+}
+.bandeau-edition .bouton { min-height: 36px; padding: 0 .8rem; font-size: .9rem; }
